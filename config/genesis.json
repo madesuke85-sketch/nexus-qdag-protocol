@@ -1,0 +1,23 @@
+{
+  "genesis_block": {
+    "height": 0,
+    "parents": ["0000000000000000000000000000000000000000000000000000000000000000"],
+    "epoch_anchor": true,
+    "timestamp": 1772841600.0,
+    "ai_proof": {
+      "w": 25000,
+      "b": 12000,
+      "loss": 50,
+      "epochs": 0,
+      "zk_proof": "NEXUS_QDAG_GENESIS_UNIVERSAL_STATE_PROOF"
+    },
+    "genesis_allocation": [
+      {
+        "address": "NXQ_GENESIS_FOUNDATION_RESERVE_000",
+        "amount": 10000000.0,
+        "note": "Initial Ecosystem & Insurance Slash Pool"
+      }
+    ],
+    "hash": "4a7b9c1d0e8f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b"
+  }
+}

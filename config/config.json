@@ -1,0 +1,24 @@
+{
+  "network": {
+    "chain_name": "NEXUS-QDAG-MAINNET-PROTO",
+    "p2p_port": 9888,
+    "web_port": 5000,
+    "target_block_time_seconds": 1.0,
+    "epoch_finality_depth": 5
+  },
+  "consensus": {
+    "engine": "Quantized-zkML-FixedPoint",
+    "int_scale": 10000,
+    "target_loss_threshold": 0.05
+  },
+  "acoustic": {
+    "sample_rate": 44100,
+    "carrier_frequencies_hz": [17500, 18000, 18500, 19000],
+    "symbol_duration_ms": 20
+  },
+  "tokenomics": {
+    "max_supply": 100000000,
+    "initial_block_reward": 50.0,
+    "halving_interval_blocks": 210000
+  }
+}
