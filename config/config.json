@@ -1,24 +1,23 @@
 {
   "network": {
-    "chain_name": "NEXUS-QDAG-MAINNET-PROTO",
-    "p2p_port": 9888,
-    "web_port": 5000,
-    "target_block_time_seconds": 1.0,
+    "chain_name": "NEXUS-QDAG-SOVEREIGN-MAINNET",
+    "target_block_time_seconds": 3.0,
     "epoch_finality_depth": 5
   },
-  "consensus": {
-    "engine": "Quantized-zkML-FixedPoint",
-    "int_scale": 10000,
-    "target_loss_threshold": 0.05
-  },
-  "acoustic": {
-    "sample_rate": 44100,
-    "carrier_frequencies_hz": [17500, 18000, 18500, 19000],
-    "symbol_duration_ms": 20
-  },
   "tokenomics": {
-    "max_supply": 100000000,
-    "initial_block_reward": 50.0,
-    "halving_interval_blocks": 210000
+    "max_supply": 2100000,
+    "initial_block_reward": 0.5,
+    "halving_interval_blocks": 210000,
+    "gas_fee_rules": {
+      "base_fee": 0.005,
+      "burn_ratio": 0.50,
+      "miner_dividend_ratio": 0.30,
+      "treasury_ratio": 0.20
+    }
+  },
+  "mining_tiers": {
+    "tier_1_community": { "multiplier": 1.0, "cost_nxq": 0 },
+    "tier_2_pro": { "multiplier": 3.0, "burn_required_nxq": 2.0 },
+    "tier_3_titan": { "multiplier": 10.0, "burn_required_nxq": 5.0 }
   }
 }
