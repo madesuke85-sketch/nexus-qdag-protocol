@@ -44,5 +44,14 @@ Kunjungi portal interaktif dan dompet biometrik resmi langsung dari browser:
 
 ---
 
+
+
+---
+
+## 👑 Kepemimpinan & Arsitek Protokol
+- **Founder & Lead Protocol Architect:** **Made Suke Raditia**
+- **Genesis Founder Vault:** 210.000 NXQ (10% Pasokan Global Terkunci)
+- **Repositori Resmi:** [github.com/madesuke85-sketch/nexus-qdag-protocol](https://github.com/madesuke85-sketch/nexus-qdag-protocol)
+
 ## 📜 Lisensi
 Didistribusikan di bawah Lisensi Terbuka MIT.
