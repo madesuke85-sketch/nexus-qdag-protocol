@@ -55,12 +55,32 @@
         .tx-out { color: #f87171; }
         .tx-burn { color: #f59e0b; }
         .tx-founder { color: #c084fc; font-weight: bold; }
+    
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .coin-showcase { text-align: center; margin: 15px 0; }
+        .coin-3d { width: 140px; height: 140px; filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.4)); transition: transform 0.5s; }
+        .coin-3d:hover { transform: scale(1.08) rotate(15deg); }
+        
     </style>
 </head>
 <body>
+    
     <div class="header">
-        <div class="logo">NEXUS·QDAG</div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="coin.svg" width="38" height="38" style="filter: drop-shadow(0 0 8px #00f0ff88); animation: spin 12s linear infinite;">
+            <div class="logo">NEXUS·QDAG</div>
+        </div>
         <div class="badge">👑 FOUNDER SUITE</div>
+    </div>
+
+    <div class="card" style="text-align: center; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border-color: #f59e0b44;">
+        <div class="card-title" style="color: #fef08a;">✨ KOIN RESMI NEXUS-QDAG (NXQ TOKEN)</div>
+        <div class="coin-showcase">
+            <img src="coin.svg" class="coin-3d" alt="NEXUS Coin Logo">
+        </div>
+        <div style="font-size: 0.8rem; color: #94a3b8; font-family: monospace;">SYMBOL: <strong style="color:#00f0ff;">NXQ</strong> | HARD-CAP: <strong style="color:#f59e0b;">2.100.000</strong></div>
+    </div>
+    
     </div>
 
     <button class="btn-panic" id="btnPanic" onclick="toggleDecoyVault()">🚨 MODE SAMARAN / PANIC SWITCH (MATI)</button>
