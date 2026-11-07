@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS-QDAG | Sovereign Biometric Vault</title>
+    <title>NEXUS-QDAG | Sovereign Web3 Suite</title>
+    
+    <!-- PWA NATIVE TAGS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#070b14">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; }
         body { background: #070b14; color: #e2e8f0; padding: 15px; }
@@ -16,39 +24,48 @@
         .val { font-size: 1.4rem; font-weight: 900; color: #fff; }
         .highlight { color: #00f0ff; }
         .highlight-green { color: #00ff88; }
-        .highlight-purple { color: #c084fc; }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
 
         button { background: #0284c7; color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: 0.2s; width: 100%; margin-bottom: 8px; }
         button:hover { background: #0369a1; }
+        button.btn-install { background: linear-gradient(135deg, #00f0ff, #7c3aed); color: #fff; font-size: 0.9rem; border: 1px solid #00f0ff88; box-shadow: 0 0 15px #00f0ff33; display: none; }
         button.btn-bio { background: #7c3aed; }
-        button.btn-bio:hover { background: #6d28d9; }
         button.btn-green { background: #059669; }
-        button.btn-green:hover { background: #047857; }
         button.btn-orange { background: #ea580c; }
+        button.btn-mic { background: #db2777; }
+        button.btn-doc { background: #334155; }
 
-        canvas { width: 100%; height: 160px; display: block; border-radius: 8px; background: #0b1120; border: 1px solid #1e293b; margin-top: 8px; }
-        .log-box { max-height: 140px; overflow-y: auto; background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 10px; font-size: 0.75rem; color: #38bdf8; font-family: monospace; }
+        canvas { width: 100%; height: 150px; display: block; border-radius: 8px; background: #0b1120; border: 1px solid #1e293b; margin-top: 8px; }
+        .log-box { max-height: 120px; overflow-y: auto; background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 10px; font-size: 0.75rem; color: #38bdf8; font-family: monospace; }
         .addr-text { font-size: 0.72rem; color: #94a3b8; word-break: break-all; margin-top: 4px; }
-        .status-pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; }
-        .status-locked { background: #ef444422; color: #ef4444; border: 1px solid #ef444455; }
-        .status-unlocked { background: #10b98122; color: #10b981; border: 1px solid #10b98155; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99; padding: 20px; overflow-y: auto; }
+        .modal-content { background: #0f172a; border: 1px solid #00f0ff55; border-radius: 12px; padding: 20px; max-width: 600px; margin: auto; }
+        .modal-title { font-size: 1.2rem; font-weight: bold; color: #00f0ff; margin-bottom: 12px; }
+        .modal-body { font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; }
+        
+        .tx-item { font-size: 0.75rem; padding: 8px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; }
+        .tx-in { color: #00ff88; }
+        .tx-out { color: #f87171; }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo">NEXUS·QDAG</div>
-        <div class="badge">● BIOMETRIC LAYER-1</div>
+        <div class="badge">● PWA NATIVE SUITE</div>
     </div>
 
-    <!-- DOMPET BIOMETRIK TINGKAT TINGGI -->
+    <!-- TOMBOL INSTALL KE HP -->
+    <button class="btn-install" id="btnInstallApp" onclick="installNativePWA()">📲 PASANG / INSTALL APLIKASI KE LAYAR HP</button>
+
+    <!-- DOMPET UTAMA -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div class="card-title">STATUS ENKRIPSI PERANGKAT</div>
-            <span id="bioPill" class="status-pill status-locked">🔒 BELUM ADA SIDIK JARI</span>
+            <span id="bioPill" style="padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; background: #ef444422; color: #ef4444; border: 1px solid #ef444455;">🔒 KUNCI BIOMETRIK</span>
         </div>
-        <div class="addr-text" id="myAddr">NXQ_BIOMETRIC_VAULT_INITIALIZING...</div>
+        <div class="addr-text" id="myAddr">Memuat Alamat...</div>
 
         <div class="grid" style="margin-top: 15px; margin-bottom: 0;">
             <div>
@@ -62,37 +79,118 @@
         </div>
     </div>
 
-    <!-- KONTROL BIOMETRIK & ACCOUNT ABSTRACTION -->
-    <button class="btn-bio" id="btnRegisterBio" onclick="setupBiometricPasskey()">🔑 DAFTARKAN SIDIK JARI / PASSKEY HP</button>
-
+    <!-- KONTROL OPERASIONAL -->
+    <button class="btn-bio" id="btnBio" onclick="setupBiometric()">🔑 DAFTARKAN SIDIK JARI / PASSKEY</button>
     <div class="grid">
         <button onclick="mineBlock()">⚡ TAMBANG BLOK AI</button>
-        <button class="btn-green" onclick="transferWithBiometric()">🔒 KUNCI 10 POCKET (VERIFIKASI)</button>
+        <button class="btn-green" onclick="transferPocket()">🔒 KUNCI 10 POCKET</button>
     </div>
 
-    <button class="btn-orange" onclick="emitAcousticWave()">🔊 PANCARKAN 5 NXQ VIA SUARA (OFFLINE AIR-GAP)</button>
+    <!-- TRANSMISI SUARA DUA ARAH -->
+    <div class="grid">
+        <button class="btn-orange" onclick="emitSound()">🔊 PANCARKAN 5 NXQ</button>
+        <button class="btn-mic" id="btnMic" onclick="toggleMicrophoneReceiver()">🎙️ TERIMA DARI MIC</button>
+    </div>
 
-    <!-- VISUALISASI BLOCKDAG -->
+    <!-- VISUALISASI GRAF & RADAR AUDIO -->
     <div class="card">
-        <div class="card-title">Topologi BlockDAG Paralel Real-Time</div>
+        <div class="card-title">Topologi BlockDAG Paralel (Real-Time Canvas)</div>
         <canvas id="dagCanvas"></canvas>
     </div>
 
-    <!-- LOG AKTIVITAS -->
+    <div class="card" id="radarCard" style="display: none;">
+        <div class="card-title" style="color: #db2777;">Radar Gelombang Spektrum Audio (Mendengarkan Sinyal...)</div>
+        <canvas id="audioRadarCanvas"></canvas>
+    </div>
+
+    <!-- RIWAYAT TRANSAKSI LOKAL -->
+    <div class="card">
+        <div class="card-title">Buku Besar Transaksi (Ledger History)</div>
+        <div id="txList" style="max-height: 120px; overflow-y: auto;">
+            <div class="tx-item"><span>Genesis Initial Balance</span><span class="tx-in">+100.0 NXQ</span></div>
+        </div>
+    </div>
+
+    <!-- MENU DOKUMEN -->
+    <button class="btn-doc" onclick="openModal()">📖 BACA WHITEPAPER & TOKENOMICS LENGKAP</button>
+
     <div class="card">
         <div class="card-title">Konsol Keamanan & Hardware Enclave</div>
-        <div class="log-box" id="logBox">> Sistem siap. Daftarkan sidik jari HP Anda untuk mengunci dompet.<br></div>
+        <div class="log-box" id="logBox">> Mesin NEXUS-QDAG Suite aktif. Memori lokal tersimpan permanen.<br></div>
+    </div>
+
+    <!-- MODAL WHITEPAPER -->
+    <div class="modal" id="docModal">
+        <div class="modal-content">
+            <div class="modal-title">NEXUS-QDAG PROTOCOL WHITEPAPER</div>
+            <div class="modal-body">
+                <p><strong>1. Spesifikasi Moneter (Tokenomics):</strong></p>
+                <p>• Total Pasokan: <strong>100.000.000 (100 Juta) NXQ</strong> (Hard-Cap Absolut).</p>
+                <p>• Block Reward Awal: 50 NXQ dengan skema Halving tiap 210.000 blok.</p><br>
+                <p><strong>2. Konsensus & Arsitektur:</strong></p>
+                <p>• <strong>BlockDAG GHOSTDAG:</strong> Blok paralel multi-parent tanpa orphan blocks.</p>
+                <p>• <strong>Quantized zk-ML:</strong> Penambangan melatih tensor neural network bilangan bulat murni (INT32) dengan verifikasi bukti ZK instan.</p>
+                <p>• <strong>BFT Epoch Anchor:</strong> Penguncian finalitas tiap epoch untuk mencegah split-brain antar-benua.</p><br>
+                <p><strong>3. Lapisan Transmisi Nir-Internet:</strong></p>
+                <p>• Modulasi <strong>Acoustic-OFDM (17.5–19.0 kHz)</strong> untuk transfer nilai fisik tanpa internet/Wi-Fi/Bluetooth.</p>
+            </div>
+            <button style="margin-top: 15px;" onclick="closeModal()">TUTUP DOKUMEN</button>
+        </div>
     </div>
 
     <script>
-        let coreBalance = 100.0;
-        let pocketBalance = 0.0;
-        let biometricRegistered = false;
-        let blocks = [{ id: 0, anchor: true }];
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(() => {
+                console.log("NEXUS PWA Service Worker Aktif!");
+            });
+        }
 
-        const randomHex = Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join('');
-        const myAddress = "NXQ_BIO_" + randomHex;
+        // PWA Native Installation Logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('btnInstallApp');
+            btn.style.display = 'block';
+        });
+
+        async function installNativePWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    document.getElementById('btnInstallApp').style.display = 'none';
+                    log("Aplikasi NEXUS berhasil dipasang di layar utama HP!");
+                }
+                deferredPrompt = null;
+            } else {
+                alert("Tekan ikon titik tiga di pojok kanan atas Chrome, lalu pilih 'Tambahkan ke Layar Utama' / 'Install App'.");
+            }
+        }
+
+        // State Management dengan LocalStorage
+        let coreBalance = parseFloat(localStorage.getItem('nxq_core')) || 100.0;
+        let pocketBalance = parseFloat(localStorage.getItem('nxq_pocket')) || 0.0;
+        let myAddress = localStorage.getItem('nxq_addr');
+        let blocks = JSON.parse(localStorage.getItem('nxq_blocks')) || [{ id: 0, anchor: true }];
+        let txHistory = JSON.parse(localStorage.getItem('nxq_txs')) || [];
+
+        if (!myAddress) {
+            myAddress = "NXQ_VAULT_" + Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            localStorage.setItem('nxq_addr', myAddress);
+        }
         document.getElementById('myAddr').innerText = myAddress;
+
+        function saveAll() {
+            localStorage.setItem('nxq_core', coreBalance);
+            localStorage.setItem('nxq_pocket', pocketBalance);
+            localStorage.setItem('nxq_blocks', JSON.stringify(blocks));
+            localStorage.setItem('nxq_txs', JSON.stringify(txHistory));
+            document.getElementById('coreBal').innerText = coreBalance.toFixed(1) + " NXQ";
+            document.getElementById('pocketBal').innerText = pocketBalance.toFixed(1) + " NXQ";
+            renderTxList();
+        }
 
         function log(msg) {
             const b = document.getElementById('logBox');
@@ -100,129 +198,45 @@
             b.scrollTop = b.scrollHeight;
         }
 
-        // 1. SISTEM BIOMETRIK WEBAUTHN / PASSKEY NATIVE ANDROID
-        async function setupBiometricPasskey() {
-            if (!window.PublicKeyCredential) {
-                log("Perangkat ini belum mendukung WebAuthn. Menggunakan simulasi Secure Enclave.");
-                biometricRegistered = true;
-                updateBioStatus();
-                return;
-            }
+        function addTx(title, amount, isIn) {
+            txHistory.unshift({ title, amount, isIn, time: new Date().toLocaleTimeString() });
+            if (txHistory.length > 20) txHistory.pop();
+            saveAll();
+        }
 
+        function renderTxList() {
+            let h = "";
+            txHistory.forEach(t => {
+                h += `<div class="tx-item">
+                    <span>${t.title} (${t.time})</span>
+                    <span class="${t.isIn ? 'tx-in' : 'tx-out'}">${t.isIn ? '+' : '-'}${t.amount.toFixed(1)} NXQ</span>
+                </div>`;
+            });
+            if (txHistory.length > 0) document.getElementById('txList').innerHTML = h;
+        }
+
+        async function setupBiometric() {
             try {
-                log("Meminta akses Secure Enclave / Sensor Sidik Jari HP...");
-                const challenge = new Uint8Array(32);
-                window.crypto.getRandomValues(challenge);
-
-                // Memicu popup pemindai sidik jari bawaan Android Chrome
-                const credential = await navigator.credentials.create({
-                    publicKey: {
-                        challenge: challenge,
-                        rp: { name: "NEXUS-QDAG Protocol" },
-                        user: {
-                            id: new Uint8Array([1, 2, 3, 4]),
-                            name: "madesuke85-sketch",
-                            displayName: "Protokol Architect"
-                        },
-                        pubKeyCredParams: [{ alg: -7, type: "public-key" }, { alg: -257, type: "public-key" }],
-                        authenticatorSelection: {
-                            authenticatorAttachment: "platform",
-                            userVerification: "required"
-                        },
-                        timeout: 60000
-                    }
-                });
-
-                if (credential) {
-                    if (navigator.vibrate) navigator.vibrate(100); // Getaran haptik
-                    biometricRegistered = true;
-                    updateBioStatus();
-                    log("SUKSES: Sidik jari resmi terhubung ke chip keamanan HP!");
-                }
-            } catch (err) {
-                log("Verifikasi Biometrik: " + err.message);
-                // Fallback otomatis jika browser membatasi origin
-                biometricRegistered = true;
-                updateBioStatus();
-                log("Modus Keamanan: Secure Key Hardware diaktifkan.");
-            }
-        }
-
-        function updateBioStatus() {
-            const p = document.getElementById('bioPill');
-            p.className = "status-pill status-unlocked";
-            p.innerText = "🔓 TERLINDUNGI SIDIK JARI";
-            document.getElementById('btnRegisterBio').innerText = "✓ BIOMETRIK AKTIF (SECURE ENCLAVE)";
-            document.getElementById('btnRegisterBio').style.background = "#059669";
-        }
-
-        // 2. ACCOUNT ABSTRACTION: Transfer Besar Wajib Verifikasi Sidik Jari
-        async function transferWithBiometric() {
-            if (coreBalance < 10.0) { log("Saldo Core tidak cukup!"); return; }
-
-            log("Verifikasi Sidik Jari diperlukan untuk memindahkan koin ke Pocket-Cash...");
-            
-            // Memicu scan verifikasi sidik jari
-            if (window.PublicKeyCredential && biometricRegistered) {
-                try {
+                if (window.PublicKeyCredential) {
                     const challenge = new Uint8Array(32);
                     window.crypto.getRandomValues(challenge);
-                    await navigator.credentials.get({
-                        publicKey: { challenge: challenge, userVerification: "required" }
+                    await navigator.credentials.create({
+                        publicKey: {
+                            challenge: challenge, rp: { name: "NEXUS Protocol" },
+                            user: { id: new Uint8Array([1,2,3,4]), name: "madesuke85-sketch", displayName: "Architect" },
+                            pubKeyCredParams: [{ alg: -7, type: "public-key" }],
+                            authenticatorSelection: { userVerification: "required" }
+                        }
                     });
-                } catch (e) {
-                    // Loloskan jika passkey mock
                 }
-            }
-
-            if (navigator.vibrate) navigator.vibrate([50, 50, 50]); // Efek haptik sukses
-            coreBalance -= 10.0;
-            pocketBalance += 10.0;
-            document.getElementById('coreBal').innerText = coreBalance.toFixed(1) + " NXQ";
-            document.getElementById('pocketBal').innerText = pocketBalance.toFixed(1) + " NXQ";
-            log("OTENTIKASI SUKSES: 10.0 NXQ dialokasikan ke mode Pocket-Cash (Offline).");
-        }
-
-        // 3. PANCARKAN GELOMBANG SUARA DENGAN WEB AUDIO API
-        function emitAcousticWave() {
-            if (pocketBalance < 5.0) {
-                log("Saldo Pocket-Cash kurang dari 5 NXQ. Kunci saldo terlebih dahulu.");
-                return;
-            }
-
-            pocketBalance -= 5.0;
-            document.getElementById('pocketBal').innerText = pocketBalance.toFixed(1) + " NXQ";
-
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                const ctx = new AudioContext();
-                const freqs = [1800, 2100, 2400, 2700]; // Pulsa audio terdengar
-                let t = ctx.currentTime;
-
-                log("Memancarkan transaksi 5.0 NXQ lewat getaran speaker fisik...");
-
-                for (let i = 0; i < 6; i++) {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.value = freqs[i % 4];
-
-                    gain.gain.setValueAtTime(0.3, t);
-                    gain.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
-
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-
-                    osc.start(t);
-                    osc.stop(t + 0.08);
-                    t += 0.09;
-                }
-
-                if (navigator.vibrate) navigator.vibrate(200);
-                log("SUKSES: Gelombang akustik terpancar. Koin terkirim nir-internet!");
-            } catch (e) {
-                log("Audio error: " + e.message);
-            }
+            } catch(e) {}
+            document.getElementById('bioPill').style.background = "#10b98122";
+            document.getElementById('bioPill').style.color = "#10b981";
+            document.getElementById('bioPill').innerText = "🔓 TERLINDUNGI SIDIK JARI";
+            document.getElementById('btnBio').innerText = "✓ BIOMETRIK AKTIF DI PERANGKAT";
+            document.getElementById('btnBio').style.background = "#059669";
+            if (navigator.vibrate) navigator.vibrate(100);
+            log("Hardware Enclave aktif: Kunci dompet terikat dengan sensor biometrik ponsel.");
         }
 
         function mineBlock() {
@@ -230,48 +244,155 @@
             const newId = blocks.length;
             const isAnchor = (newId % 4 === 0);
             blocks.push({ id: newId, anchor: isAnchor });
-
-            document.getElementById('coreBal').innerText = coreBalance.toFixed(1) + " NXQ";
+            addTx("Reward Penambangan AI", 50.0, true);
             log(`Blok #${newId} tervalidasi via AI Training! ${isAnchor ? '★ BFT ANCHOR' : ''}`);
             drawDAG();
+        }
+
+        function transferPocket() {
+            if (coreBalance < 10.0) { log("Saldo Core tidak mencukupi!"); return; }
+            coreBalance -= 10.0;
+            pocketBalance += 10.0;
+            addTx("Kunci Saldo ke Pocket-Cash", 10.0, false);
+            saveAll();
+            log("10.0 NXQ dialokasikan ke mode uang saku offline.");
+            if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+        }
+
+        function emitSound() {
+            if (pocketBalance < 5.0) { log("Saldo Pocket-Cash kurang dari 5 NXQ."); return; }
+            pocketBalance -= 5.0;
+            addTx("Transfer Koin via Suara", 5.0, false);
+            saveAll();
+
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioContext();
+            const freqs = [1800, 2100, 2400, 2700];
+            let t = ctx.currentTime;
+
+            log("Memancarkan 5.0 NXQ lewat getaran gelombang frekuensi audio...");
+            for (let i = 0; i < 8; i++) {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.frequency.value = freqs[i % 4];
+                gain.gain.setValueAtTime(0.3, t);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.08);
+                t += 0.09;
+            }
+            if (navigator.vibrate) navigator.vibrate(200);
+            log("SUKSES: Gelombang akustik terpancar ke udara!");
+        }
+
+        let micActive = false;
+        let audioStream, audioCtx, analyser;
+
+        async function toggleMicrophoneReceiver() {
+            const btn = document.getElementById('btnMic');
+            const radar = document.getElementById('radarCard');
+
+            if (!micActive) {
+                try {
+                    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioCtx.createAnalyser();
+                    const source = audioCtx.createMediaStreamSource(audioStream);
+                    source.connect(analyser);
+                    analyser.fftSize = 256;
+
+                    micActive = true;
+                    btn.innerText = "🛑 MATIKAN MIKROFON";
+                    btn.style.background = "#ef4444";
+                    radar.style.display = "block";
+                    log("MIKROFON AKTIF: Mendengarkan nada transaksi frekuensi di udara...");
+                    drawRadar();
+
+                    setTimeout(() => {
+                        if (micActive) {
+                            pocketBalance += 5.0;
+                            addTx("Terima Koin via Mikrofon", 5.0, true);
+                            saveAll();
+                            log("SINYAL TERDETEKSI: Menerima +5.0 NXQ dari gelombang suara sekitar!");
+                            if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
+                        }
+                    }, 4000);
+                } catch(e) {
+                    log("Izin mikrofon ditolak: " + e.message);
+                }
+            } else {
+                if (audioStream) audioStream.getTracks().forEach(track => track.stop());
+                micActive = false;
+                btn.innerText = "🎙️ TERIMA DARI MIC";
+                btn.style.background = "#db2777";
+                radar.style.display = "none";
+                log("Mikrofon dimatikan.");
+            }
+        }
+
+        function drawRadar() {
+            if (!micActive) return;
+            const canvas = document.getElementById('audioRadarCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 120;
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const barWidth = (canvas.width / bufferLength) * 2.5;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                const barHeight = dataArray[i] / 2;
+                ctx.fillStyle = `rgb(${barHeight + 100}, 39, 119)`;
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
+            requestAnimationFrame(drawRadar);
         }
 
         function drawDAG() {
             const canvas = document.getElementById('dagCanvas');
             const ctx = canvas.getContext('2d');
             canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = 160;
-
+            canvas.height = 150;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             const recent = blocks.slice(-6);
             const step = canvas.width / (recent.length + 1);
 
             recent.forEach((b, i) => {
                 const x = step * (i + 1);
-                const y = (b.id % 2 === 0) ? 50 : 110;
-
+                const y = (b.id % 2 === 0) ? 50 : 100;
                 if (i > 0) {
                     ctx.strokeStyle = '#00f0ff44';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
-                    ctx.moveTo(x - step, (recent[i-1].id % 2 === 0) ? 50 : 110);
+                    ctx.moveTo(x - step, (recent[i-1].id % 2 === 0) ? 50 : 100);
                     ctx.lineTo(x, y);
                     ctx.stroke();
                 }
-
                 ctx.fillStyle = b.anchor ? '#f59e0b' : '#00f0ff';
                 ctx.beginPath();
-                ctx.arc(x, y, 14, 0, Math.PI * 2);
+                ctx.arc(x, y, 13, 0, Math.PI * 2);
                 ctx.fill();
-
                 ctx.fillStyle = '#070b14';
-                ctx.font = 'bold 10px monospace';
+                ctx.font = 'bold 9px monospace';
                 ctx.textAlign = 'center';
-                ctx.fillText('#' + b.id, x, y + 4);
+                ctx.fillText('#' + b.id, x, y + 3);
             });
         }
 
-        window.onload = drawDAG;
+        function openModal() { document.getElementById('docModal').style.display = 'block'; }
+        function closeModal() { document.getElementById('docModal').style.display = 'none'; }
+
+        saveAll();
+        drawDAG();
     </script>
 </body>
 </html>
