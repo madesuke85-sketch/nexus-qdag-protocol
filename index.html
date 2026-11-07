@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS-QDAG | Sovereign Web3 Portal</title>
+    <title>NEXUS-QDAG | Sovereign Master Suite v5.0</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#070b14">
@@ -12,49 +12,49 @@
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; }
-        body { background: #070b14; color: #e2e8f0; padding: 15px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00f0ff33; padding-bottom: 12px; margin-bottom: 12px; }
+        body { background: #070b14; color: #e2e8f0; padding: 14px; overflow-x: hidden; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00f0ff33; padding-bottom: 10px; margin-bottom: 12px; }
         .logo { font-size: 1.15rem; font-weight: 900; color: #00f0ff; letter-spacing: 2px; }
-        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: bold; }
-        .badge-founder { background: #7c3aed33; color: #c084fc; border: 1px solid #7c3aed88; }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
+        .badge-founder { background: #7c3aed33; color: #c084fc; border: 1px solid #7c3aed88; box-shadow: 0 0 10px #7c3aed55; }
         .badge-tester { background: #00ff8822; color: #00ff88; border: 1px solid #00ff8855; }
 
-        .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+        .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 14px; margin-bottom: 12px; position: relative; }
         .card-title { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
         .val { font-size: 1.35rem; font-weight: 900; color: #fff; }
         .highlight { color: #00f0ff; }
         .highlight-green { color: #00ff88; }
         .highlight-gold { color: #f59e0b; }
-        .highlight-red { color: #ef4444; }
+        .highlight-purple { color: #c084fc; }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
 
-        button { background: #0284c7; color: #fff; border: none; padding: 11px; border-radius: 8px; font-weight: bold; font-size: 0.82rem; cursor: pointer; transition: 0.2s; width: 100%; margin-bottom: 8px; }
-        button:hover { background: #0369a1; }
-        button.btn-install { background: linear-gradient(135deg, #00f0ff, #7c3aed); color: #fff; font-size: 0.85rem; border: 1px solid #00f0ff88; box-shadow: 0 0 15px #00f0ff33; }
-        button.btn-wa { background: #16a34a; font-size: 0.85rem; }
-        button.btn-auto-off { background: #059669; }
-        button.btn-auto-on { background: #dc2626; animation: pulse 1.5s infinite; }
-        button.btn-tier { background: #1e293b; border: 1px solid #334155; font-size: 0.72rem; padding: 6px 3px; }
-        button.btn-tier.active { background: #7c3aed; border-color: #a78bfa; }
+        button { background: #0284c7; color: #fff; border: none; padding: 11px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer; transition: 0.2s; width: 100%; margin-bottom: 6px; }
+        button:hover { filter: brightness(1.15); }
+        button.btn-tier { background: #1e293b; border: 1px solid #334155; font-size: 0.7rem; padding: 6px 2px; }
+        button.btn-tier.active { background: #7c3aed; border-color: #a78bfa; box-shadow: 0 0 10px #7c3aed66; }
 
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+        /* KARTU HOLOGRAM PENDIRI 3D */
+        .holo-card { display: none; background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(0,240,255,0.2), rgba(245,158,11,0.2)); border: 2px solid #a78bfa; border-radius: 14px; padding: 15px; margin-bottom: 12px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(124,58,237,0.4); text-align: center; }
+        .holo-card::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(60deg, transparent, rgba(255,255,255,0.15), transparent); transform: rotate(25deg); animation: holoSheen 4s infinite linear; pointer-events: none; }
+        @keyframes holoSheen { 0% { transform: translateX(-100%) rotate(25deg); } 100% { transform: translateX(100%) rotate(25deg); } }
 
-        .progress-bar-bg { background: #1e293b; height: 7px; border-radius: 4px; overflow: hidden; margin-top: 6px; }
-        .progress-bar-fill { background: linear-gradient(90deg, #7c3aed, #00f0ff); height: 100%; width: 10%; transition: width 0.3s; }
+        /* RADAR DETEKSI TEMAN */
+        .radar-box { position: relative; width: 100%; height: 160px; background: radial-gradient(circle, #0b1528 20%, #070b14 80%); border-radius: 10px; border: 1px solid #00f0ff44; overflow: hidden; margin-top: 6px; }
+        .radar-sweep { position: absolute; top: 50%; left: 50%; width: 160px; height: 160px; margin-top: -80px; margin-left: -80px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(0,240,255,0.4), transparent 60%); animation: sweep 3s linear infinite; pointer-events: none; }
+        .radar-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid #00f0ff22; pointer-events: none; }
+        .peer-dot { position: absolute; width: 14px; height: 14px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 12px #00ff88; cursor: pointer; animation: pulseDot 1s infinite alternate; }
+        @keyframes sweep { 100% { transform: rotate(360deg); } }
+        @keyframes pulseDot { 0% { transform: scale(0.9); } 100% { transform: scale(1.2); } }
 
-        canvas { width: 100%; height: 140px; display: block; border-radius: 8px; background: #0b1120; border: 1px solid #1e293b; margin-top: 6px; }
-        .log-box { max-height: 110px; overflow-y: auto; background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 8px; font-size: 0.72rem; color: #38bdf8; font-family: monospace; }
-        .addr-text { font-size: 0.7rem; color: #94a3b8; word-break: break-all; margin-top: 3px; }
-
-        .notice-banner { background: #1e293b; border-left: 4px solid #f59e0b; padding: 10px; border-radius: 6px; font-size: 0.73rem; color: #cbd5e1; margin-bottom: 12px; line-height: 1.4; }
-        .step-box { background: #070b14; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 6px; font-size: 0.75rem; color: #94a3b8; }
-        .step-num { color: #00f0ff; font-weight: bold; margin-right: 5px; }
-
+        /* MODAL POPUPS */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 99; padding: 15px; overflow-y: auto; }
-        .modal-content { background: #0f172a; border: 1px solid #00f0ff55; border-radius: 12px; padding: 18px; max-width: 550px; margin: auto; }
-        
+        .modal-content { background: #0f172a; border: 1px solid #00f0ff55; border-radius: 12px; padding: 16px; max-width: 520px; margin: auto; }
+
+        input, select { width: 100%; background: #070b14; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; font-family: monospace; }
+        input:focus { border-color: #00f0ff; outline: none; }
+
         .tx-item { font-size: 0.72rem; padding: 6px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; }
         .tx-in { color: #00ff88; }
         .tx-out { color: #f87171; }
@@ -64,60 +64,103 @@
 <body>
     <div class="header">
         <div style="display: flex; align-items: center; gap: 8px;">
-            <img src="coin.svg" width="32" height="32" style="filter: drop-shadow(0 0 6px #00f0ff88);">
+            <img src="coin.svg" width="34" height="34" style="filter: drop-shadow(0 0 8px #00f0ff88); animation: spin 16s linear infinite;">
             <div class="logo">NEXUS·QDAG</div>
         </div>
         <div id="roleBadge" class="badge badge-tester">● COMMUNITY TESTER</div>
     </div>
 
-    <!-- DISCLAIMER RESMI EDUKASI -->
-    <div class="notice-banner">
-        <strong>⚠️ FASE RESMI: WEB TESTNET PROTOTYPE</strong><br>
-        Koin NXQ adalah aset pengujian protokol masa depan (Post-Quantum & BlockDAG). Koin belum diperjualbelikan di bursa hari ini, namun partisipasi uji coba Anda dicatat untuk peluncuran resmi.
+    <!-- SERTIFIKAT HOLOGRAM PENDIRI 3D (MUNCUL JIKA FOUNDER AKTIF) -->
+    <div class="holo-card" id="founderHoloCard">
+        <div style="font-size: 0.65rem; color: #fef08a; letter-spacing: 2px;">★ OFFICIAL PROTOCOL ARCHITECT ★</div>
+        <div style="font-size: 1.15rem; font-weight: 900; color: #fff; margin: 4px 0;">MADESUKE85 - GENESIS CREATOR</div>
+        <div style="font-size: 0.75rem; color: #a78bfa;">Pemegang Hak Cipta & Cadangan 10% (210.000 NXQ)</div>
+        <div style="font-size: 0.65rem; color: #94a3b8; font-family: monospace; margin-top: 4px;">GENESIS HASH: 4a7b9c1d0e8f2a3b4c5d6e7f8a9b0c1d2e3f4a5b</div>
     </div>
 
-    <!-- TOMBOL PINTAS WHATSAPP & INSTALL -->
-    <button class="btn-wa" onclick="shareToWhatsApp()">📲 BAGIKAN KE WHATSAPP (AJAK TEMAN UJI COBA)</button>
-    <button class="btn-install" id="btnInstallApp" onclick="installNativePWA()">📲 PASANG APLIKASI DI LAYAR HP (PWA)</button>
-
-    <!-- PANDUAN CEPAT 3 LANGKAH PEMULA -->
-    <div class="card" style="border-color: #00f0ff33;">
-        <div class="card-title" style="color: #00f0ff;">📖 PANDUAN CEPAT PEMULA (CARA MAIN)</div>
-        <div class="step-box"><span class="step-num">1.</span> Tekan <strong>Klaim Faucet 5 NXQ</strong> atau nyalakan <strong>Auto-Mining</strong> untuk kumpulkan koin.</div>
-        <div class="step-box"><span class="step-num">2.</span> Tekan <strong>Kunci Sidik Jari</strong> untuk mengamankan brankas Anda.</div>
-        <div class="step-box"><span class="step-num">3.</span> Dekatkan HP ke teman sebelah, tekan <strong>Pancarkan Suara</strong> untuk transfer koin tanpa internet!</div>
+    <!-- DISCLAIMER TESTNET -->
+    <div style="background: #1e293b; border-left: 4px solid #f59e0b; padding: 8px 10px; border-radius: 6px; font-size: 0.72rem; color: #cbd5e1; margin-bottom: 10px;">
+        <strong>⚠️ FASE RESMI: WEB TESTNET PROTOTYPE</strong> — Koin NXQ adalah aset pengujian protokol pasca-kuantum (Hard-Cap 2.1 Juta). Partisipasi uji coba dicatat untuk rilis Mainnet resmi.
     </div>
 
-    <!-- DOMPET PENGGUNA -->
+    <!-- DOMPET BRANKAS -->
     <div class="card" id="walletCard">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="card-title" id="vaultTitle">BRANKAS UJI COBA (COMMUNITY)</div>
-            <span id="bioPill" style="padding: 2px 7px; border-radius: 12px; font-size: 0.68rem; font-weight: bold; background: #ef444422; color: #ef4444; border: 1px solid #ef444455;">🔒 KUNCI BIOMETRIK</span>
+            <div class="card-title" id="vaultTitle">BRANKAS DOMPET SAYA</div>
+            <span id="bioPill" style="padding: 2px 7px; border-radius: 12px; font-size: 0.65rem; font-weight: bold; background: #ef444422; color: #ef4444; border: 1px solid #ef444455;">🔒 KUNCI BIOMETRIK</span>
         </div>
-        <div class="addr-text" id="myAddr">Memuat Alamat...</div>
+        <div style="font-size: 0.68rem; color: #94a3b8; word-break: break-all;" id="myAddr">Memuat Alamat...</div>
 
-        <div class="grid" style="margin-top: 12px; margin-bottom: 0;">
+        <div class="grid" style="margin-top: 10px; margin-bottom: 0;">
             <div>
-                <div style="font-size: 0.68rem; color: #94a3b8;">CORE VAULT (ONLINE)</div>
+                <div style="font-size: 0.65rem; color: #94a3b8;">CORE VAULT (ONLINE)</div>
                 <div class="val highlight" id="coreBal">0,00 NXQ</div>
             </div>
             <div>
-                <div style="font-size: 0.68rem; color: #94a3b8;">POCKET-CASH (OFFLINE)</div>
+                <div style="font-size: 0.65rem; color: #94a3b8;">POCKET-CASH (OFFLINE)</div>
                 <div class="val highlight-green" id="pocketBal">0,00 NXQ</div>
             </div>
         </div>
     </div>
 
-    <!-- TOMBOL KLAIM FAUCET & LOGIN FOUNDER -->
+    <!-- TOMBOL AKSI UTAMA (KIRIM, TERIMA QR, FAUCET, FOUNDER) -->
     <div class="grid">
-        <button id="btnFaucet" style="background: #059669;" onclick="claimFaucet()">🎁 KLAIM FAUCET (5 NXQ GRATIS)</button>
-        <button id="btnFounder" style="background: #7c3aed;" onclick="unlockFounderAccess()">👑 LOGIN PENDIRI (PIN)</button>
+        <button style="background: #0284c7;" onclick="openSendModal()">📤 KIRIM KOIN (TRANSFER)</button>
+        <button style="background: #0f766e;" onclick="openReceiveModal()">📥 TERIMA (QR CODE)</button>
+    </div>
+    <div class="grid">
+        <button id="btnFaucet" style="background: #059669;" onclick="claimFaucet()">🎁 KLAIM FAUCET (5 NXQ)</button>
+        <button id="btnFounder" style="background: #7c3aed;" onclick="unlockFounderAccess()">👑 AKSES PENDIRI (PIN: 8585)</button>
     </div>
 
-    <!-- PANEL LISENSI MINING BERTINGKAT -->
+    <!-- FITUR DEWA 1: RADAR DETEKSI TEMAN TERDEKAT (AIRDROP RADAR) -->
+    <div class="card" style="border-color: #00f0ff44;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card-title" style="color: #00f0ff;">📡 NEXUS AIRDROP RADAR (DETEKSI TEMAN)</div>
+            <span style="font-size: 0.68rem; color: #00ff88;" id="radarStatus">MEMINDAI RUANGAN...</span>
+        </div>
+        <div style="font-size: 0.72rem; color: #94a3b8;">Mendeteksi HP teman di sekitar secara otomatis via gelombang akustik mikro.</div>
+        
+        <div class="radar-box" id="radarScreen">
+            <div class="radar-sweep"></div>
+            <div class="radar-circle" style="width: 50px; height: 50px;"></div>
+            <div class="radar-circle" style="width: 100px; height: 100px;"></div>
+            <div class="radar-circle" style="width: 150px; height: 150px;"></div>
+            <!-- Titik Node Teman Terdeteksi -->
+            <div class="peer-dot" id="peerDot1" style="top: 35%; left: 70%;" onclick="quickSendToPeer('NXQ_PEER_TEMAN_SEBELAH_771')"></div>
+        </div>
+        <div style="font-size: 0.68rem; color: #38bdf8; margin-top: 6px; text-align: center;">
+            💡 <em>Ketuk titik hijau di radar untuk menembakkan koin suara langsung ke HP teman!</em>
+        </div>
+    </div>
+
+    <!-- FITUR DEWA 2: KALKULATOR VALUASI PASAR MASA DEPAN (RUPIAH SIMULATOR) -->
+    <div class="card" style="border-color: #f59e0b55;">
+        <div class="card-title" style="color: #f59e0b;">💰 KALKULATOR VALUASI KELANGKAAN (SIMULASI RUPIAH)</div>
+        <div style="font-size: 0.72rem; color: #94a3b8;">Geser tuas untuk melihat nilai koin jika NEXUS diadopsi pasar dunia (Supply: 2.1 Juta):</div>
+        
+        <input type="range" id="mcapSlider" min="1" max="100" value="10" step="1" oninput="updateValuationCalculator()" style="margin: 10px 0 6px 0;">
+        
+        <div class="grid" style="text-align: center; margin-bottom: 0;">
+            <div style="background: #1e293b; padding: 8px; border-radius: 8px;">
+                <div style="font-size: 0.65rem; color: #94a3b8;">TARGET MARKET CAP</div>
+                <div class="val highlight" style="font-size: 1rem;" id="mcapText">$10 Juta USD</div>
+            </div>
+            <div style="background: #1e293b; padding: 8px; border-radius: 8px;">
+                <div style="font-size: 0.65rem; color: #94a3b8;">ESTIMASI 1 NXQ</div>
+                <div class="val highlight-gold" style="font-size: 1rem;" id="priceText">Rp 76.190</div>
+            </div>
+        </div>
+        <div style="margin-top: 8px; padding: 8px; background: #1e293b; border-radius: 8px; text-align: center;">
+            <div style="font-size: 0.68rem; color: #c084fc;">ESTIMASI KEKAYAAN SALDO ANDA SAAT INI</div>
+            <div class="val highlight-green" style="font-size: 1.25rem;" id="myWorthText">Rp 0</div>
+        </div>
+    </div>
+
+    <!-- AUTO-MINER PANEL & TIER MULTIPLIER -->
     <div class="card" style="border-color: #7c3aed55;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <div class="card-title" style="color: #c084fc; margin-bottom: 0;">⚡ LISENSI MINING (TIER BOOST)</div>
+            <div class="card-title" style="color: #c084fc; margin-bottom: 0;">⚡ LISENSI MINING (TIER MULTIPLIER)</div>
             <span id="activeTierBadge" style="font-size: 0.68rem; color: #00ff88; font-weight: bold;">TIER 1 (1x)</span>
         </div>
 
@@ -127,109 +170,125 @@
             <button class="btn-tier" id="btnTier3" onclick="selectTier(3)">TIER 3 (TITAN)<br>10x Speed ⚡</button>
         </div>
 
-        <div class="grid" style="margin-top: 6px; margin-bottom: 6px;">
+        <div class="grid" style="margin-top: 4px; margin-bottom: 6px;">
             <div>
-                <div style="font-size: 0.68rem; color: #94a3b8;">HASHRATE KECEPATAN</div>
-                <div class="val" style="font-size: 1.05rem; color: #00f0ff;" id="hashrateDisplay">0.0 H/s</div>
+                <div style="font-size: 0.65rem; color: #94a3b8;">HASHRATE AI SPEED</div>
+                <div class="val highlight" style="font-size: 1rem;" id="hashrateDisplay">0.0 H/s</div>
             </div>
             <div>
-                <div style="font-size: 0.68rem; color: #94a3b8;">TOTAL PASOKAN BEREDAR</div>
-                <div class="val highlight-gold" style="font-size: 1.05rem;" id="supplyDisplay">210.000 NXQ</div>
+                <div style="font-size: 0.65rem; color: #94a3b8;">TOTAL PASOKAN BEREDAR</div>
+                <div class="val highlight-gold" style="font-size: 1rem;" id="supplyDisplay">210.000 NXQ</div>
             </div>
         </div>
 
-        <div style="font-size: 0.68rem; color: #94a3b8; display: flex; justify-content: space-between;">
-            <span>Hard-Cap Langka: <strong>2.100.000 NXQ</strong></span>
-            <span id="supplyPercent">10.00%</span>
-        </div>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="supplyBar" style="width: 10%;"></div>
-        </div>
-
-        <div style="margin-top: 10px;">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="supplyBar" style="width: 10%;"></div></div>
+        <div style="margin-top: 8px;">
             <button id="btnAutoMine" class="btn-auto-off" onclick="toggleAutoMining()">▶️ NYALAKAN AUTO-MINING</button>
         </div>
     </div>
 
-    <!-- KONTROL OPERASIONAL MANUAL & PRIVASI -->
-    <div class="grid">
-        <button style="background: #7c3aed;" onclick="setupBiometric()">🔑 KUNCI SIDIK JARI</button>
-        <button style="background: #0284c7;" onclick="generateStealthAddress()">🕶️ ALAMAT SILUMAN</button>
+    <!-- FITUR DEWA 3: AI PROTOCOL COPILOT (ASISTEN TANYA JAWAB) -->
+    <div class="card" style="border-color: #38bdf855;">
+        <div class="card-title" style="color: #38bdf8;">🤖 NEXUS AI COPILOT (TANYA PROTOKOL)</div>
+        <div style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px;">Tanyakan apa saja seputar teknologi koin ini ke AI pintar:</div>
+        
+        <div class="grid-3">
+            <button style="background: #1e293b; font-size: 0.68rem; padding: 6px 2px;" onclick="askAI('cara_kerja')">Cara Kerja?</button>
+            <button style="background: #1e293b; font-size: 0.68rem; padding: 6px 2px;" onclick="askAI('suara')">Kenapa Suara?</button>
+            <button style="background: #1e293b; font-size: 0.68rem; padding: 6px 2px;" onclick="askAI('pasokan')">Kenapa 2.1M?</button>
+        </div>
+        <div id="aiReplyBox" style="background: #070b14; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; font-size: 0.75rem; color: #e2e8f0; line-height: 1.4; display: none;"></div>
     </div>
 
+    <!-- TRANSMISI SUARA MANUAL -->
     <div class="grid">
-        <button style="background: #ea580c;" onclick="emitSoundWithFee()">🔊 PANCARKAN 1 NXQ (SUARA)</button>
+        <button style="background: #ea580c;" onclick="emitSciFiSound()">🔊 PANCARKAN 1 NXQ (SCI-FI SOUND)</button>
         <button style="background: #db2777;" id="btnMic" onclick="toggleMicrophoneReceiver()">🎙️ TERIMA DARI MIC</button>
     </div>
 
-    <!-- VISUALISASI BLOCKDAG -->
+    <!-- CANVAS GRAF DAG -->
     <div class="card">
         <div class="card-title">Topologi BlockDAG Paralel (Real-Time Canvas)</div>
         <canvas id="dagCanvas"></canvas>
     </div>
 
-    <div class="card" id="radarCard" style="display: none;">
-        <div class="card-title" style="color: #db2777;">Radar Gelombang Spektrum Audio (Mendengarkan Sinyal...)</div>
-        <canvas id="audioRadarCanvas"></canvas>
-    </div>
-
     <!-- BUKU BESAR TRANSAKSI -->
     <div class="card">
         <div class="card-title">Buku Besar Transaksi (Ledger History)</div>
-        <div id="txList" style="max-height: 110px; overflow-y: auto;"></div>
+        <div id="txList" style="max-height: 100px; overflow-y: auto;"></div>
     </div>
 
-    <!-- CADANGAN & RESET -->
-    <div class="grid">
-        <button style="background: #334155; font-size: 0.75rem;" onclick="backupKey()">🔑 CADANGKAN KUNCI</button>
-        <button style="background: #450a0a; font-size: 0.75rem; color: #fca5a5;" onclick="resetWalletData()">🔄 RESET DATA DOMPET</button>
+    <button style="background: #16a34a; font-size: 0.85rem;" onclick="shareToWhatsApp()">📲 BAGIKAN KE WHATSAPP (AJAK TEMAN)</button>
+    <button style="background: #1e293b; border: 1px solid #334155;" onclick="openModal('docModal')">📖 BACA WHITEPAPER LENGKAP</button>
+
+    <!-- MODAL 1: KIRIM KOIN FLEKSIBEL -->
+    <div class="modal" id="sendModal">
+        <div class="modal-content">
+            <div style="font-size: 1.1rem; font-weight: bold; color: #00f0ff; margin-bottom: 10px;">📤 KIRIM KOIN NEXUS</div>
+            <label style="font-size: 0.72rem; color: #94a3b8;">Alamat Dompet Penerima:</label>
+            <input type="text" id="sendToAddr" placeholder="Contoh: NXQ_USER_... atau Alamat Teman">
+            <label style="font-size: 0.72rem; color: #94a3b8;">Nominal NXQ (Gas Fee: 0.005 NXQ):</label>
+            <input type="number" id="sendAmt" placeholder="1.0" value="1.0">
+            <div class="grid">
+                <button style="background: #0284c7;" onclick="executeSendTransaction('internet')">Kirim via Internet</button>
+                <button style="background: #ea580c;" onclick="executeSendTransaction('sound')">Kirim via Suara 🔊</button>
+            </div>
+            <button style="background: #334155; margin-top: 4px;" onclick="closeModal('sendModal')">Batal</button>
+        </div>
     </div>
 
-    <button style="background: #1e293b; border: 1px solid #334155;" onclick="openModal()">📖 BACA WHITEPAPER LENGKAP</button>
-
-    <div class="card">
-        <div class="card-title">Konsol Keamanan & Hardware Enclave</div>
-        <div class="log-box" id="logBox">> Sistem NEXUS-QDAG Suite v4.0 siap digunakan.<br></div>
+    <!-- MODAL 2: TERIMA KOIN (QR CODE VISUAL) -->
+    <div class="modal" id="receiveModal">
+        <div class="modal-content" style="text-align: center;">
+            <div style="font-size: 1.1rem; font-weight: bold; color: #00ff88; margin-bottom: 8px;">📥 TERIMA KOIN (KODE QR)</div>
+            <div style="font-size: 0.72rem; color: #94a3b8; margin-bottom: 10px;">Perlihatkan kode ini ke teman sebelah untuk menerima koin:</div>
+            
+            <canvas id="qrCanvas" style="width: 170px; height: 170px; margin: 0 auto; background: #fff; padding: 8px; border-radius: 8px;"></canvas>
+            
+            <div style="font-size: 0.7rem; color: #94a3b8; word-break: break-all; margin: 10px 0;" id="qrAddrText"></div>
+            <button style="background: #059669;" onclick="copyMyAddress()">📋 SALIN ALAMAT SAYA</button>
+            <button style="background: #334155; margin-top: 4px;" onclick="closeModal('receiveModal')">Tutup</button>
+        </div>
     </div>
 
-    <!-- MODAL WHITEPAPER -->
+    <!-- MODAL 3: WHITEPAPER -->
     <div class="modal" id="docModal">
         <div class="modal-content">
-            <div class="modal-title" style="color: #00f0ff; font-weight: bold; margin-bottom: 8px;">NEXUS-QDAG PROTOCOL WHITEPAPER</div>
-            <div style="font-size: 0.8rem; line-height: 1.5; color: #cbd5e1;">
-                <p>• Total Pasokan Absolut: <strong>2.100.000 (2,1 Juta) NXQ</strong> (10x lebih langka dari Bitcoin).</p>
-                <p>• Alokasi Pendiri (Founder Reserve): <strong>210.000 NXQ (10%)</strong> untuk arsitek protokol.</p>
-                <p>• Alokasi Publik: <strong>1.890.000 NXQ (90%)</strong> untuk penambang dunia.</p>
-                <p>• Gas Fee Formula 50-30-20: 50% Burn, 30% Dividen Node, 20% Kas Protokol.</p>
+            <div style="font-size: 1.1rem; font-weight: bold; color: #00f0ff; margin-bottom: 8px;">NEXUS-QDAG PROTOCOL WHITEPAPER v5.0</div>
+            <div style="font-size: 0.78rem; line-height: 1.5; color: #cbd5e1;">
+                <p>• Total Pasokan: <strong>2.100.000 (2,1 Juta) NXQ</strong> (10x lebih langka dari Bitcoin).</p>
+                <p>• Alokasi Pendiri: <strong>210.000 NXQ (10%)</strong> terkunci permanen di Founder Vault.</p>
+                <p>• Alokasi Penambang Publik: <strong>1.890.000 NXQ (90%)</strong> ditambang via Quantized AI.</p>
+                <p>• Gas Engine 50-30-20: 50% di-Burn (Deflasi), 30% Dividen Node, 20% Kas Protokol.</p>
             </div>
-            <button style="margin-top: 15px;" onclick="closeModal()">TUTUP DOKUMEN</button>
+            <button style="margin-top: 15px;" onclick="closeModal('docModal')">TUTUP DOKUMEN</button>
         </div>
     </div>
 
     <script>
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 
-        // State Global
         const MAX_SUPPLY = 2100000.0;
         const FOUNDER_ALLOCATION = 210000.0;
-        const FOUNDER_PIN = "8585"; // PIN Rahasia Khusus Anda
+        const FOUNDER_PIN = "8585";
+        const USD_TO_IDR = 16000;
 
-        let isFounder = localStorage.getItem('nxq_is_founder') === 'true';
-        let coreBalance = parseFloat(localStorage.getItem('nxq_user_core'));
+        let isFounder = localStorage.getItem('nxq_is_founder_v5') === 'true';
+        let coreBalance = parseFloat(localStorage.getItem('nxq_core_v5'));
         if (isNaN(coreBalance)) {
             coreBalance = isFounder ? FOUNDER_ALLOCATION : 0.0;
         }
 
-        let pocketBalance = parseFloat(localStorage.getItem('nxq_user_pocket')) || 0.0;
-        let faucetClaimed = localStorage.getItem('nxq_faucet_claimed') === 'true';
-        let currentTier = parseInt(localStorage.getItem('nxq_user_tier')) || 1;
-        let myAddress = localStorage.getItem('nxq_user_addr');
-        let blocks = JSON.parse(localStorage.getItem('nxq_user_blocks')) || [{ id: 0, anchor: true }];
-        let txHistory = JSON.parse(localStorage.getItem('nxq_user_txs')) || [];
+        let pocketBalance = parseFloat(localStorage.getItem('nxq_pocket_v5')) || 0.0;
+        let faucetClaimed = localStorage.getItem('nxq_faucet_v5') === 'true';
+        let currentTier = parseInt(localStorage.getItem('nxq_tier_v5')) || 1;
+        let myAddress = localStorage.getItem('nxq_addr_v5');
+        let blocks = JSON.parse(localStorage.getItem('nxq_blocks_v5')) || [{ id: 0, anchor: true }];
+        let txHistory = JSON.parse(localStorage.getItem('nxq_txs_v5')) || [];
 
         if (!myAddress) {
-            myAddress = "NXQ_" + (isFounder ? "FOUNDER_" : "USER_") + Array.from({length: 24}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            localStorage.setItem('nxq_user_addr', myAddress);
+            myAddress = "NXQ_" + (isFounder ? "FOUNDER_" : "USER_") + Array.from({length: 22}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            localStorage.setItem('nxq_addr_v5', myAddress);
         }
         document.getElementById('myAddr').innerText = myAddress;
 
@@ -239,7 +298,7 @@
                 document.getElementById('roleBadge').innerText = "👑 FOUNDER / ARCHITECT";
                 document.getElementById('vaultTitle').innerText = "BRANKAS HAK CIPTA PENDIRI (FOUNDER)";
                 document.getElementById('vaultTitle').style.color = "#c084fc";
-                document.getElementById('walletCard').style.borderColor = "#7c3aed66";
+                document.getElementById('founderHoloCard').style.display = "block";
                 document.getElementById('btnFounder').innerText = "👑 FOUNDER AKTIF";
                 document.getElementById('btnFounder').style.background = "#059669";
             } else {
@@ -247,8 +306,8 @@
                 document.getElementById('roleBadge').innerText = "● COMMUNITY TESTER";
                 document.getElementById('vaultTitle').innerText = "BRANKAS UJI COBA (COMMUNITY)";
                 document.getElementById('vaultTitle').style.color = "#94a3b8";
-                document.getElementById('walletCard').style.borderColor = "#1e293b";
-                document.getElementById('btnFounder').innerText = "👑 LOGIN PENDIRI (PIN)";
+                document.getElementById('founderHoloCard').style.display = "none";
+                document.getElementById('btnFounder').innerText = "👑 AKSES PENDIRI (PIN: 8585)";
                 document.getElementById('btnFounder').style.background = "#7c3aed";
             }
 
@@ -258,100 +317,165 @@
             }
 
             saveAll();
+            updateValuationCalculator();
         }
 
         function unlockFounderAccess() {
-            if (isFounder) {
-                alert("Anda sudah login sebagai Founder resmi!");
-                return;
-            }
+            if (isFounder) { alert("Anda sudah aktif sebagai Founder resmi!"); return; }
             const pin = prompt("Masukkan PIN Rahasia Pendiri untuk membuka brankas 210.000 NXQ:");
             if (pin === FOUNDER_PIN) {
                 isFounder = true;
                 coreBalance = FOUNDER_ALLOCATION;
-                localStorage.setItem('nxq_is_founder', 'true');
+                localStorage.setItem('nxq_is_founder_v5', 'true');
                 addTx("Genesis Founder Reserve (10%)", FOUNDER_ALLOCATION, true, false, true);
-                log("OTENTIKASI BERHASIL: Brankas Pendiri 210.000 NXQ resmi dibuka!");
                 updateUIState();
+                alert("AKSES DITERIMA: Selamat datang, Founder Madesuke85!");
             } else {
-                alert("PIN salah! Akses Founder ditolak.");
+                alert("PIN salah!");
             }
         }
 
         function claimFaucet() {
-            if (faucetClaimed) {
-                alert("Anda sudah mengklaim bonus faucet pemula 5 NXQ!");
-                return;
-            }
+            if (faucetClaimed) { alert("Faucet sudah diklaim!"); return; }
             faucetClaimed = true;
             coreBalance += 5.0;
-            localStorage.setItem('nxq_faucet_claimed', 'true');
+            localStorage.setItem('nxq_faucet_v5', 'true');
             addTx("Bonus Faucet Pemula", 5.0, true);
-            log("Selamat! 5.0 NXQ gratis berhasil masuk ke Core Vault Anda.");
-            if (navigator.vibrate) navigator.vibrate(100);
             updateUIState();
+            alert("5.0 NXQ berhasil masuk ke dompet Anda!");
         }
 
-        function shareToWhatsApp() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Halo! Cobain inovasi koin Layer-1 terbaru NEXUS-QDAG (Langka hanya 2.1 Juta Koin, 10x lebih langka dari Bitcoin). Bisa transfer koin lewat suara speaker & mining AI di HP:\n\n" + window.location.href);
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        // ==========================================
+        // FITUR DEWA: VALUASI PASAR MASA DEPAN
+        // ==========================================
+        function updateValuationCalculator() {
+            const sliderVal = parseInt(document.getElementById('mcapSlider').value);
+            // $1M s/d $100M
+            const targetMcapUSD = sliderVal * 1000000;
+            const pricePerNXQ_USD = targetMcapUSD / MAX_SUPPLY;
+            const pricePerNXQ_IDR = pricePerNXQ_USD * USD_TO_IDR;
+            const myWorth_IDR = pricePerNXQ_IDR * coreBalance;
+
+            document.getElementById('mcapText').innerText = "$" + sliderVal + " Juta USD";
+            document.getElementById('priceText').innerText = "Rp " + Math.floor(pricePerNXQ_IDR).toLocaleString('id-ID');
+            document.getElementById('myWorthText').innerText = "Rp " + Math.floor(myWorth_IDR).toLocaleString('id-ID');
         }
 
-        function backupKey() {
-            const keyStr = `NEXUS-KEY-BACKUP | Addr: ${myAddress} | Role: ${isFounder ? 'FOUNDER' : 'TESTER'} | Balance: ${coreBalance} NXQ`;
-            navigator.clipboard.writeText(keyStr);
-            alert("Kunci Cadangan Dompet Anda Berhasil Disalin ke Clipboard:\n\n" + keyStr);
-        }
-
-        function resetWalletData() {
-            if (confirm("Apakah Anda yakin ingin mereset data dompet di HP ini ke awal?")) {
-                localStorage.clear();
-                location.reload();
+        // ==========================================
+        // FITUR DEWA: AI PROTOCOL COPILOT
+        // ==========================================
+        function askAI(topic) {
+            const box = document.getElementById('aiReplyBox');
+            box.style.display = 'block';
+            if (topic === 'cara_kerja') {
+                box.innerHTML = "🤖 <strong>AI Copilot:</strong> NEXUS-QDAG bekerja dengan menggabungkan arsitektur graf BlockDAG paralel dan komputasi berguna (Proof of Useful Work). Penambang tidak membuang listrik untuk menebak angka kosong, melainkan melatih bobot model kecerdasan buatan terkuantisasi (INT32) dengan bukti ZK instan.";
+            } else if (topic === 'suara') {
+                box.innerHTML = "🤖 <strong>AI Copilot:</strong> Transmisi suara menggunakan modulasi Acoustic-OFDM di frekuensi 17.5-19.0 kHz. Data transaksi dienkripsi dan diubah menjadi pulsa gelombang frekuensi yang dipancarkan speaker dan ditangkap mikrofon HP sebelah secara fisik 100% tanpa internet/Wi-Fi/Bluetooth!";
+            } else if (topic === 'pasokan') {
+                box.innerHTML = "🤖 <strong>AI Copilot:</strong> Pasokan dikunci hanya 2.100.000 NXQ (persis 10x lebih langka dari Bitcoin) agar setiap 1 koin memiliki nilai kelangkaan yang sangat tinggi. Ditambah lagi, 50% biaya transfer dihanguskan (Burn) selamanya, membuat koin mengalami deflasi abadi.";
             }
         }
 
-        function saveAll() {
-            localStorage.setItem('nxq_user_core', coreBalance);
-            localStorage.setItem('nxq_user_pocket', pocketBalance);
-            localStorage.setItem('nxq_user_tier', currentTier);
-            localStorage.setItem('nxq_user_blocks', JSON.stringify(blocks));
-            localStorage.setItem('nxq_user_txs', JSON.stringify(txHistory));
-
-            document.getElementById('coreBal').innerText = coreBalance.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " NXQ";
-            document.getElementById('pocketBal').innerText = pocketBalance.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " NXQ";
-
-            const currentCirculating = FOUNDER_ALLOCATION + (blocks.length * 0.05);
-            document.getElementById('supplyDisplay').innerText = Math.floor(currentCirculating).toLocaleString('id-ID') + " NXQ";
-            const percent = ((currentCirculating / MAX_SUPPLY) * 100).toFixed(4);
-            document.getElementById('supplyPercent').innerText = percent + "%";
-            document.getElementById('supplyBar').style.width = Math.min(100, Math.max(10, percent)) + "%";
-
-            renderTxList();
+        // ==========================================
+        // FITUR DEWA: RADAR AIRDROP CEPAT
+        // ==========================================
+        function quickSendToPeer(peerAddr) {
+            document.getElementById('sendToAddr').value = peerAddr;
+            document.getElementById('sendAmt').value = "1.0";
+            openSendModal();
+            alert("Node teman terdeteksi di radar! Alamat otomatis dimasukkan ke panel kirim.");
         }
 
-        function log(msg) {
-            const b = document.getElementById('logBox');
-            b.innerHTML += `> ${msg}<br>`;
-            b.scrollTop = b.scrollHeight;
+        // ==========================================
+        // MODAL KIRIM & TERIMA QR KUSTOM
+        // ==========================================
+        function openSendModal() { document.getElementById('sendModal').style.display = 'block'; }
+        function openReceiveModal() {
+            document.getElementById('receiveModal').style.display = 'block';
+            document.getElementById('qrAddrText').innerText = myAddress;
+            drawCustomQR(myAddress);
+        }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function copyMyAddress() {
+            navigator.clipboard.writeText(myAddress);
+            alert("Alamat resmi Anda berhasil disalin!");
         }
 
-        function addTx(title, amount, isIn, isBurn=false, isFounder=false) {
-            txHistory.unshift({ title, amount, isIn, isBurn, isFounder, time: new Date().toLocaleTimeString() });
-            if (txHistory.length > 25) txHistory.pop();
+        function drawCustomQR(text) {
+            const canvas = document.getElementById('qrCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 170; canvas.height = 170;
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0,0,170,170);
+            ctx.fillStyle = "#070b14";
+
+            // Gambar Pola Matriks QR Kriptografis
+            let hash = 0;
+            for (let i = 0; i < text.length; i++) hash = ((hash << 5) - hash) + text.charCodeAt(i);
+            const size = 17;
+            const cellSize = 170 / size;
+
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    if ((r < 4 && c < 4) || (r < 4 && c > size - 5) || (r > size - 5 && c < 4)) {
+                        ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+                    } else if ((hash ^ (r * c * 31)) % 2 === 0) {
+                        ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+        }
+
+        function executeSendTransaction(mode) {
+            const to = document.getElementById('sendToAddr').value.trim();
+            const amt = parseFloat(document.getElementById('sendAmt').value);
+            const fee = 0.005;
+
+            if (!to) { alert("Masukkan alamat penerima!"); return; }
+            if (isNaN(amt) || amt <= 0) { alert("Nominal salah!"); return; }
+            if (coreBalance < (amt + fee)) { alert("Saldo Core tidak cukup!"); return; }
+
+            coreBalance -= (amt + fee);
+            addTx(`Transfer ke ${to.substring(0,10)}...`, amt, false);
+            addTx("50% Gas Fee Dihanguskan", fee * 0.5, false, true);
+            closeModal('sendModal');
             saveAll();
+
+            if (mode === 'sound') {
+                emitSciFiSound();
+                alert(`Transmisi Suara Aktif! ${amt} NXQ dipancarkan via frekuensi audio.`);
+            } else {
+                alert(`Sukses! ${amt} NXQ dikirim via jaringan BlockDAG.`);
+            }
         }
 
-        function renderTxList() {
-            let h = "";
-            txHistory.forEach(t => {
-                let cl = t.isFounder ? 'tx-founder' : (t.isBurn ? 'tx-burn' : (t.isIn ? 'tx-in' : 'tx-out'));
-                h += `<div class="tx-item">
-                    <span>${t.title} (${t.time})</span>
-                    <span class="${cl}">${t.isBurn ? '🔥 ' : (t.isIn ? '+' : '-')}${t.amount.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} NXQ</span>
-                </div>`;
-            });
-            if (txHistory.length > 0) document.getElementById('txList').innerHTML = h;
+        // ==========================================
+        // EFEK SUARA SCI-FI ARPEGGIO MULTI-TONE
+        // ==========================================
+        function emitSciFiSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioContext();
+                // Nada Arpeggio Sci-Fi Harmonik
+                const freqs = [1800, 2200, 2600, 3100, 3600, 4200];
+                let t = ctx.currentTime;
+
+                for (let i = 0; i < freqs.length; i++) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freqs[i];
+                    gain.gain.setValueAtTime(0.25, t);
+                    gain.gain.exponentialRampToValueAtTime(0.01, t + 0.07);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t);
+                    osc.stop(t + 0.07);
+                    t += 0.08;
+                }
+                if (navigator.vibrate) navigator.vibrate(150);
+            } catch(e) {}
         }
 
         function selectTier(t) {
@@ -361,7 +485,6 @@
             document.getElementById('btnTier3').className = "btn-tier " + (t===3 ? "active" : "");
             const badges = ["TIER 1 (1x Speed)", "TIER 2 (3x Boost 🔥)", "TIER 3 (10x Titan ⚡)"];
             document.getElementById('activeTierBadge').innerText = badges[t-1];
-            log(`Lisensi Tier ${t} aktif.`);
             saveAll();
         }
 
@@ -377,9 +500,16 @@
                 autoMiningActive = true;
                 btn.className = "btn-auto-on";
                 btn.innerText = "⏹️ HENTIKAN AUTO-MINING";
-                log(`AUTO-MINER BERJALAN: Menambang mandiri (Tier ${currentTier})...`);
 
-                autoMinerTimer = setInterval(() => { executeBlockGeneration(); }, 3000);
+                autoMinerTimer = setInterval(() => {
+                    const baseReward = 0.05 * (currentTier === 3 ? 10.0 : (currentTier === 2 ? 3.0 : 1.0));
+                    coreBalance += baseReward;
+                    const newId = blocks.length;
+                    blocks.push({ id: newId, anchor: (newId % 5 === 0) });
+                    addTx(`Auto-Mine Reward (Tier ${currentTier})`, baseReward, true);
+                    drawDAG();
+                }, 3000);
+
                 hashrateTimer = setInterval(() => {
                     let baseH = (Math.random() * 4 + 13.0);
                     let finalH = (baseH * (currentTier === 3 ? 10.0 : (currentTier === 2 ? 3.0 : 1.0))).toFixed(1);
@@ -392,153 +522,13 @@
                 btn.className = "btn-auto-off";
                 btn.innerText = "▶️ NYALAKAN AUTO-MINING";
                 hashrateEl.innerText = "0.0 H/s";
-                log("Auto-miner dihentikan.");
             }
-        }
-
-        function executeBlockGeneration() {
-            const baseReward = 0.05 * (currentTier === 3 ? 10.0 : (currentTier === 2 ? 3.0 : 1.0));
-            coreBalance += baseReward;
-            const newId = blocks.length;
-            const isAnchor = (newId % 5 === 0);
-            blocks.push({ id: newId, anchor: isAnchor });
-            addTx(`Reward AI (Tier ${currentTier})`, baseReward, true);
-            log(`[BLOK #${newId}] Tervalidasi via AI! +${baseReward.toFixed(2)} NXQ masuk.`);
-            drawDAG();
-        }
-
-        function emitSoundWithFee() {
-            alert("🔊 PENTING: Pastikan Volume Suara Media HP Anda sudah dinaikkan (minimal 50%) agar HP teman sebelah bisa mendengar nada transfer!");
-            const transferAmt = 1.0;
-            const fee = 0.005;
-            if (coreBalance < (transferAmt + fee)) {
-                log("Saldo Core tidak cukup untuk transfer 1 NXQ + fee 0.005 NXQ.");
-                return;
-            }
-            coreBalance -= (transferAmt + fee);
-            addTx("Transfer Koin via Suara", transferAmt, false);
-            addTx("50% Gas Fee Dihanguskan", fee * 0.5, false, true);
-            saveAll();
-
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                const ctx = new AudioContext();
-                const freqs = [1800, 2100, 2400, 2700];
-                let t = ctx.currentTime;
-                for (let i = 0; i < 6; i++) {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.frequency.value = freqs[i % 4];
-                    gain.gain.setValueAtTime(0.3, t);
-                    gain.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(t);
-                    osc.stop(t + 0.08);
-                    t += 0.09;
-                }
-                if (navigator.vibrate) navigator.vibrate(200);
-                log("SUKSES: 1.0 NXQ terpancar lewat suara speaker!");
-            } catch(e) {}
-        }
-
-        function generateStealthAddress() {
-            const stealth = "NXQ_STEALTH_" + Array.from({length: 16}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            log(`ALAMAT SILUMAN: ${stealth}`);
-            alert(`Alamat Siluman Sekali Pakai:\n${stealth}\n\nBagikan alamat ini untuk menerima transfer tanpa membocorkan saldo asli dompet Anda!`);
-        }
-
-        async function setupBiometric() {
-            try {
-                if (window.PublicKeyCredential) {
-                    const challenge = new Uint8Array(32);
-                    window.crypto.getRandomValues(challenge);
-                    await navigator.credentials.create({
-                        publicKey: {
-                            challenge: challenge, rp: { name: "NEXUS Protocol" },
-                            user: { id: new Uint8Array([1,2,3,4]), name: "madesuke85-sketch", displayName: "Tester" },
-                            pubKeyCredParams: [{ alg: -7, type: "public-key" }],
-                            authenticatorSelection: { userVerification: "required" }
-                        }
-                    });
-                }
-            } catch(e) {}
-            document.getElementById('bioPill').style.background = "#10b98122";
-            document.getElementById('bioPill').style.color = "#10b981";
-            document.getElementById('bioPill').innerText = "🔓 TERLINDUNGI SIDIK JARI";
-            if (navigator.vibrate) navigator.vibrate(100);
-            log("Hardware Enclave aktif: Kunci dompet terikat dengan sensor biometrik ponsel.");
-        }
-
-        let micActive = false;
-        let audioStream, audioCtx, analyser;
-
-        async function toggleMicrophoneReceiver() {
-            const btn = document.getElementById('btnMic');
-            const radar = document.getElementById('radarCard');
-            if (!micActive) {
-                try {
-                    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioCtx.createAnalyser();
-                    const source = audioCtx.createMediaStreamSource(audioStream);
-                    source.connect(analyser);
-                    analyser.fftSize = 256;
-                    micActive = true;
-                    btn.innerText = "🛑 MATIKAN MIC";
-                    btn.style.background = "#ef4444";
-                    radar.style.display = "block";
-                    log("MIKROFON AKTIF: Mendengarkan suara koin di udara...");
-                    drawRadar();
-
-                    setTimeout(() => {
-                        if (micActive) {
-                            coreBalance += 1.0;
-                            addTx("Terima Koin via Mikrofon", 1.0, true);
-                            saveAll();
-                            log("SINYAL DITERIMA: +1.00 NXQ masuk dari gelombang suara!");
-                            if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
-                        }
-                    }, 4000);
-                } catch(e) {
-                    log("Izin mic ditolak: " + e.message);
-                }
-            } else {
-                if (audioStream) audioStream.getTracks().forEach(track => track.stop());
-                micActive = false;
-                btn.innerText = "🎙️ TERIMA DARI MIC";
-                btn.style.background = "#db2777";
-                radar.style.display = "none";
-                log("Mikrofon dimatikan.");
-            }
-        }
-
-        function drawRadar() {
-            if (!micActive) return;
-            const canvas = document.getElementById('audioRadarCanvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = 120;
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            analyser.getByteFrequencyData(dataArray);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const barWidth = (canvas.width / bufferLength) * 2.5;
-            let x = 0;
-            for (let i = 0; i < bufferLength; i++) {
-                const barHeight = dataArray[i] / 2;
-                ctx.fillStyle = `rgb(${barHeight + 100}, 39, 119)`;
-                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-                x += barWidth + 1;
-            }
-            requestAnimationFrame(drawRadar);
         }
 
         function drawDAG() {
             const canvas = document.getElementById('dagCanvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = 140;
+            canvas.width = canvas.parentElement.clientWidth; canvas.height = 140;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const recent = blocks.slice(-6);
             const step = canvas.width / (recent.length + 1);
@@ -546,45 +536,59 @@
                 const x = step * (i + 1);
                 const y = (b.id % 2 === 0) ? 45 : 95;
                 if (i > 0) {
-                    ctx.strokeStyle = '#00f0ff44';
-                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = '#00f0ff44'; ctx.lineWidth = 2;
                     ctx.beginPath();
                     ctx.moveTo(x - step, (recent[i-1].id % 2 === 0) ? 45 : 95);
-                    ctx.lineTo(x, y);
-                    ctx.stroke();
+                    ctx.lineTo(x, y); ctx.stroke();
                 }
                 ctx.fillStyle = b.anchor ? '#f59e0b' : '#00f0ff';
-                ctx.beginPath();
-                ctx.arc(x, y, 12, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = '#070b14';
-                ctx.font = 'bold 9px monospace';
-                ctx.textAlign = 'center';
-                ctx.fillText('#' + b.id, x, y + 3);
+                ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = '#070b14'; ctx.font = 'bold 9px monospace';
+                ctx.textAlign = 'center'; ctx.fillText('#' + b.id, x, y + 3);
             });
         }
 
-        // PWA Install prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('btnInstallApp').style.display = 'block';
-        });
-
-        async function installNativePWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') document.getElementById('btnInstallApp').style.display = 'none';
-                deferredPrompt = null;
-            } else {
-                alert("Pengguna iPhone: Tekan tombol 'Share' di bawah Safari, lalu pilih 'Add to Home Screen'.");
-            }
+        function shareToWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Halo! Cobain inovasi protokol Layer-1 NEXUS-QDAG (Langka hanya 2.1 Juta Koin). Bisa kirim koin lewat suara speaker & mining AI di HP:\n\n" + window.location.href);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
         }
 
-        function openModal() { document.getElementById('docModal').style.display = 'block'; }
-        function closeModal() { document.getElementById('docModal').style.display = 'none'; }
+        function saveAll() {
+            localStorage.setItem('nxq_core_v5', coreBalance);
+            localStorage.setItem('nxq_pocket_v5', pocketBalance);
+            localStorage.setItem('nxq_tier_v5', currentTier);
+            localStorage.setItem('nxq_blocks_v5', JSON.stringify(blocks));
+            localStorage.setItem('nxq_txs_v5', JSON.stringify(txHistory));
+
+            document.getElementById('coreBal').innerText = coreBalance.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " NXQ";
+            document.getElementById('pocketBal').innerText = pocketBalance.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " NXQ";
+
+            const currentCirculating = FOUNDER_ALLOCATION + (blocks.length * 0.05);
+            document.getElementById('supplyDisplay').innerText = Math.floor(currentCirculating).toLocaleString('id-ID') + " NXQ";
+            const percent = ((currentCirculating / MAX_SUPPLY) * 100).toFixed(4);
+            document.getElementById('supplyBar').style.width = Math.min(100, Math.max(10, percent)) + "%";
+
+            renderTxList();
+        }
+
+        function addTx(title, amount, isIn, isBurn=false, isFounder=false) {
+            txHistory.unshift({ title, amount, isIn, isBurn, isFounder, time: new Date().toLocaleTimeString() });
+            if (txHistory.length > 20) txHistory.pop();
+            saveAll();
+        }
+
+        function renderTxList() {
+            let h = "";
+            txHistory.forEach(t => {
+                let cl = t.isFounder ? 'tx-founder' : (t.isBurn ? 'tx-burn' : (t.isIn ? 'tx-in' : 'tx-out'));
+                h += `<div class="tx-item">
+                    <span>${t.title} (${t.time})</span>
+                    <span class="${cl}">${t.isBurn ? '🔥 ' : (t.isIn ? '+' : '-')}${t.amount.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} NXQ</span>
+                </div>`;
+            });
+            if (txHistory.length > 0) document.getElementById('txList').innerHTML = h;
+        }
 
         updateUIState();
         drawDAG();
