@@ -393,6 +393,12 @@
         sec_card3_desc: "Pajak jual 0%, pajak beli 0%. Tidak ada fungsi blacklist tersembunyi.",
         sec_card4_title: "🧱 Pasokan Maksimal Kaku (Hard-Cap)",
         sec_card4_desc: "Pasokan 2.100.000 NXQ permanen. Fungsi minting dimatikan selamanya.",
+        th_param: "Parameter", tb_top: "Topologi", tb_linear: "Rantai Linier Tunggal", tb_dag: "Graf DAG Paralel",
+        tb_tp: "Throughput", tb_gas: "Biaya Gas", tb_gas_btc: "Mahal / Fluktuatif", tb_gas_eth: "Fluktuatif & Padat", tb_gas_qdag: "Nol Biaya (Zero-Fee)",
+        tb_sec: "Ketahanan Kuantum", tb_sec_bad: "Rentan (ECDSA)", tb_sec_good: "Kebal (Lattice-Based NIST)",
+        th_param: "Parameter", tb_top: "Topology", tb_linear: "Single Linear Chain", tb_dag: "Parallel DAG Graph",
+        tb_tp: "Throughput", tb_gas: "Gas Fee", tb_gas_btc: "Expensive / Volatile", tb_gas_eth: "Volatile & Congested", tb_gas_qdag: "Zero-Fee Payload",
+        tb_sec: "Quantum Resistance", tb_sec_bad: "Vulnerable (ECDSA)", tb_sec_good: "Immune (Lattice-Based NIST)",
         founder_title: "★ OFFICIAL PROTOCOL ARCHITECT VERIFIED ★",
         founder_desc: "Pemegang Hak Cipta & Cadangan Genesis 10% (210.000 NXQ Terkunci)"
       },
@@ -502,7 +508,8 @@
     // PRESALE SWAP & COUNTDOWN
     function hitungPresale(v) {
       const u = parseFloat(v) || 0;
-      document.getElementById('nxqOutput').innerText = Math.floor(u / 0.05).toLocaleString('id-ID') + ' NXQ';
+      const safeU = Math.max(0, u);
+      document.getElementById('nxqOutput').innerText = Math.floor(safeU / 0.05).toLocaleString('id-ID') + ' NXQ';
     }
 
     let presaleEnd = localStorage.getItem('nxq_presale_end_epoch');
@@ -520,7 +527,8 @@
       let h = Math.floor((diff % 86400000) / 3600000);
       let m = Math.floor((diff % 3600000) / 60000);
       let s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('presaleTimer').innerText = `${d}h : ${h<10?'0':''}${h}j : ${m<10?'0':''}${m}m : ${s<10?'0':''}${s}d`;
+      const uD = currentLang === 'id' ? 'h' : 'd'; const uH = currentLang === 'id' ? 'j' : 'h'; const uM = 'm'; const uS = currentLang === 'id' ? 'd' : 's';
+      document.getElementById('presaleTimer').innerText = `${d}${uD} : ${h<10?'0':''}${h}${uH} : ${m<10?'0':''}${m}${uM} : ${s<10?'0':''}${s}${uS}`;
     }, 1000);
 
     // WEB3 CONNECT
@@ -629,6 +637,7 @@
       if (!target || target.trim().length < 6) return;
 
       const amtStr = prompt(`Saldo Anda: ${balance.toFixed(2)} NXQ\nMasukkan nominal NXQ yang ingin dikirim:`);
+      if (amtStr === null) return;
       const amt = parseFloat(amtStr);
       if (isNaN(amt) || amt <= 0) return alert('Nominal tidak sah!');
       if (amt > balance) return alert(`Saldo tidak cukup! Saldo Anda hanya ${balance.toFixed(2)} NXQ.`);
@@ -897,6 +906,8 @@
         box.innerHTML += `<div style="color:#4ade80;">Status: KONSENSUS OPTIMAL | Finalitas: 0.18s | Skalabilitas: 100k+ TPS</div>`;
       } else if (cmd === 'peers') {
         box.innerHTML += `<div style="color:#4ade80;">Simpul Terhubung: 18 Validator Mesh Aktif</div>`;
+      } else if (cmd === 'tps') {
+        box.innerHTML += `<div style="color:#00f2fe;">Throughput Protokol: ${document.getElementById('tpsLabel').innerText} (Sub-second Finality)</div>`;
       } else if (cmd === 'quantum') {
         box.innerHTML += `<div style="color:#c084fc;">Kriptografi: Kisi LWE (NIST Post-Quantum Standard). Kebal Shor Algorithm.</div>`;
       } else if (cmd === 'clear') {
