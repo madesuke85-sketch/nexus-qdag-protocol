@@ -11,6 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="coin.svg">
   <meta name="theme-color" content="#030712">
+  <!-- Open Graph & Social Meta Tags (Official Verified Protocol) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://madesuke85-sketch.github.io/nexus-qdag-protocol/">
+  <meta property="og:title" content="🌌 NEXUS QDAG PROTOCOL ($NXQ) — Post-Quantum Parallel Mesh">
+  <meta property="og:description" content="Protokol Layer-1 Masa Depan: 100.000+ TPS, 0 Biaya Gas, dan Kebal Komputer Kuantum. Pasokan Terbatas 2.100.000 NXQ. Whitelist Presale Dibuka!">
+  <meta property="og:image" content="https://madesuke85-sketch.github.io/nexus-qdag-protocol/coin.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🌌 NEXUS QDAG PROTOCOL ($NXQ)">
+  <meta name="twitter:description" content="Post-Quantum Parallel Mesh Architecture. 0 Gas Fee, 100k+ TPS. Total Supply: 2.1M NXQ.">
+  <meta name="twitter:image" content="https://madesuke85-sketch.github.io/nexus-qdag-protocol/coin.svg">
+
 
   <!-- PEMBASMI CACHE & SERVICE WORKER LAMA SECARA TOTAL -->
   <script>
@@ -513,6 +524,12 @@
     }, 1000);
 
     // WEB3 CONNECT
+    
+    // Deteksi Injeksi Asinkron Dompet Seluler
+    window.addEventListener('ethereum#initialized', function() {
+      console.log('Web3 Provider Initialized');
+    }, { once: true });
+
     async function connectWeb3Wallet() {
       if (typeof window.ethereum !== 'undefined') {
         try {
@@ -570,6 +587,13 @@
       }
 
       lastSubmit = Date.now();
+      // Simpan cadangan data di antrean lokal (Pencegah kehilangan data)
+      try {
+        let localQueue = JSON.parse(localStorage.getItem('nxq_whitelist_queue') || '[]');
+        localQueue.push({ addr: addr, time: new Date().toISOString() });
+        localStorage.setItem('nxq_whitelist_queue', JSON.stringify(localQueue));
+      } catch(e) {}
+
       nBox.style.display = 'block';
       nBox.style.background = 'rgba(16,185,129,0.2)';
       nBox.style.color = '#4ade80';
@@ -711,7 +735,7 @@
         lastHashTime = now;
       }
 
-      if (miningActive) setTimeout(stepMining, 10);
+      if (miningActive) setTimeout(stepMining, 35);
     }
 
     function toggleAutoMining() {
