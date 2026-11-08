@@ -109,7 +109,7 @@
         <button style="background: #0f766e;" onclick="openReceiveModal()">📥 TERIMA (QR CODE)</button>
     </div>
     <div class="grid">
-        <button id="btnFaucet" style="background: #059669;" onclick="claimFaucet()">🎁 KLAIM FAUCET (5 NXQ)</button>
+        
         <button id="btnFounder" style="background: #7c3aed;" onclick="unlockFounderAccess()">👑 VERIFIKASI IDENTITAS PENDIRI</button>
     </div>
 
@@ -280,8 +280,7 @@
         }
 
         let pocketBalance = parseFloat(localStorage.getItem('nxq_pocket_v5')) || 0.0;
-        let faucetClaimed = localStorage.getItem('nxq_faucet_v5') === 'true';
-        let currentTier = parseInt(localStorage.getItem('nxq_tier_v5')) || 1;
+                let currentTier = parseInt(localStorage.getItem('nxq_tier_v5')) || 1;
         let myAddress = localStorage.getItem('nxq_addr_v5');
         let blocks = JSON.parse(localStorage.getItem('nxq_blocks_v5')) || [{ id: 0, anchor: true }];
         let txHistory = JSON.parse(localStorage.getItem('nxq_txs_v5')) || [];
@@ -335,15 +334,7 @@
             }
         }
 
-        function claimFaucet() {
-            if (faucetClaimed) { alert("Faucet sudah diklaim!"); return; }
-            faucetClaimed = true;
-            coreBalance += 5.0;
-            localStorage.setItem('nxq_faucet_v5', 'true');
-            addTx("Bonus Faucet Pemula", 5.0, true);
-            updateUIState();
-            alert("5.0 NXQ berhasil masuk ke dompet Anda!");
-        }
+        
 
         // ==========================================
         // FITUR DEWA: VALUASI PASAR MASA DEPAN
