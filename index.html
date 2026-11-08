@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEXUS-QDAG | Sovereign Post-Quantum Protocol</title>
 
-  <!-- Google Fonts Futuristik -->
+  <!-- Google Fonts: Inter, Space Grotesk, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="coin.svg">
   <meta name="theme-color" content="#030712">
 
-  <!-- PEMBASMI CACHE OTOMATIS: Memaksa peramban membuang memori lama -->
+  <!-- PEMBASMI CACHE & SERVICE WORKER LAMA SECARA TOTAL -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(r => r.forEach(reg => reg.unregister()));
@@ -23,8 +23,8 @@
   </script>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
-    body { background: radial-gradient(circle at 50% 0%, #0d1a38 0%, #030712 65%, #010206 100%); color: #f1f5f9; overflow-x: hidden; padding-bottom: 80px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: radial-gradient(circle at 50% 0%, #0d1a38 0%, #030712 65%, #010206 100%); color: #f1f5f9; overflow-x: hidden; padding-bottom: 80px; line-height: 1.5; }
     .mono { font-family: 'JetBrains Mono', monospace; }
     .title { font-family: 'Space Grotesk', sans-serif; }
 
@@ -53,7 +53,7 @@
     .badge-green { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid #4ade80; }
 
     /* HOLOGRAM 3D */
-    .holo-card { display: none; background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(0,242,254,0.2), rgba(245,158,11,0.2)); border: 2px solid #c084fc; border-radius: 16px; padding: 20px; margin-bottom: 22px; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(124,58,237,0.5); text-align: center; }
+    .holo-card { display: none; background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(0,240,255,0.2), rgba(245,158,11,0.2)); border: 2px solid #c084fc; border-radius: 16px; padding: 20px; margin-bottom: 22px; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(124,58,237,0.5); text-align: center; }
     .holo-card::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(60deg, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(25deg); animation: holoSheen 4s infinite linear; pointer-events: none; }
     @keyframes holoSheen { 0% { transform: translateX(-100%) rotate(25deg); } 100% { transform: translateX(100%) rotate(25deg); } }
 
@@ -103,7 +103,7 @@
       </div>
 
       <div style="max-width: 580px; margin: 0 auto;">
-        <!-- COUNTDOWN TIMER -->
+        <!-- COUNTDOWN TIMER KONSISTEN -->
         <div style="display: flex; justify-content: space-between; align-items: center; background: #040814; border: 1px solid #1e293b; padding: 12px 18px; border-radius: 12px; margin-bottom: 18px;">
           <span style="font-size: 0.78rem; color: #cbd5e1; font-weight: 800;" data-i18n="timer_label">⏳ PENUTUPAN PRESALE DALAM:</span>
           <span id="presaleTimer" class="mono" style="font-size: 1rem; font-weight: 900; color: #fbbf24;">14h : 08j : 42m : 15d</span>
@@ -152,7 +152,7 @@
       </div>
     </section>
 
-    <!-- ================= 2. BRANKAS DOMPET & MINING ================= -->
+    <!-- ================= 2. BRANKAS DOMPET & MINING (TANPA FAUCET) ================= -->
     <section class="card">
       <div class="card-title">
         <span data-i18n="vault_title">🔑 Brankas Dompet Kuantum & Penambang CPU</span>
@@ -332,7 +332,7 @@
 
   </div>
 
-  <!-- SCRIPT ENGINE INTI 100% BERSIH & TERUJI -->
+  <!-- JAVASCRIPT MASTER SUITE 100% BERSIH TANPA CACAT -->
   <script>
     const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1568709376112468152/lxmh7RslmGFMI5MucJvCIYlhwJWaUloUlMduyQXb-RWfV7Qe2GTFqlzng35yVvA15-w6";
     const FOUNDER_HASH = "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d";
@@ -604,8 +604,7 @@
       const target = prompt('Masukkan Alamat Penerima (NXQ_...):');
       if (!target || target.trim().length < 6) return;
 
-      const amtStr = prompt(`Saldo Anda: ${balance.toFixed(2)} NXQ
-Masukkan nominal NXQ yang ingin dikirim:`);
+      const amtStr = prompt(`Saldo Anda: ${balance.toFixed(2)} NXQ\nMasukkan nominal NXQ yang ingin dikirim:`);
       const amt = parseFloat(amtStr);
       if (isNaN(amt) || amt <= 0) return alert('Nominal tidak sah!');
       if (amt > balance) return alert(`Saldo tidak cukup! Saldo Anda hanya ${balance.toFixed(2)} NXQ.`);
@@ -625,10 +624,7 @@ Masukkan nominal NXQ yang ingin dikirim:`);
     // RADAR TRANSFER NYATA
     function transferViaRadar(peerId) {
       if (balance <= 0) return alert('⚠️ Saldo dompet kosong (0 NXQ)! Nyalakan penambang CPU untuk mendapatkan saldo.');
-      const amtStr = prompt(`📡 NODE TEMAN TERDETEKSI: ${peerId}
-Saldo Anda: ${balance.toFixed(2)} NXQ
-
-Masukkan nominal NXQ yang ingin dikirim:`);
+      const amtStr = prompt(`📡 NODE TEMAN TERDETEKSI: ${peerId}\nSaldo Anda: ${balance.toFixed(2)} NXQ\n\nMasukkan nominal NXQ yang ingin dikirim:`);
       if (!amtStr) return;
       const amt = parseFloat(amtStr);
       if (isNaN(amt) || amt <= 0) return alert('Nominal pengiriman tidak sah!');
