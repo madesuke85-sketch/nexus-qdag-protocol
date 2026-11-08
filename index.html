@@ -843,6 +843,13 @@
     }
 
     // TERMINAL COMMANDS
+    
+    function escapeHTML(str) {
+      const p = document.createElement('p');
+      p.textContent = str;
+      return p.innerHTML;
+    }
+
     function runTerminalCmd() {
       const inp = document.getElementById('termCmd');
       const box = document.getElementById('termScreen');
@@ -850,7 +857,8 @@
       if (!cmd) return;
       inp.value = '';
 
-      box.innerHTML += `<div><span style="color:#38bdf8;">> ${cmd}</span></div>`;
+      const safeCmd = escapeHTML(cmd);
+      box.innerHTML += `<div><span style="color:#38bdf8;">> ${safeCmd}</span></div>`;
       if (cmd === 'balance') {
         box.innerHTML += `<div style="color:#4ade80;">Saldo Dompet: ${balance.toFixed(2)} NXQ</div>`;
       } else if (cmd === 'supply') {
